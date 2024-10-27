@@ -94,6 +94,8 @@ Mantel-Group-Log-Assessment
 
 ## Improvements Over Previous Version
 
+https://github.com/david-osburn/DigIO-Programming-Task
+
 The project has undergone significant enhancements to align with industry best practices:
 
 - **Modular Structure**: The codebase is now organized into directories (`controllers`, `models`, `services`, `utils`), reflecting a clear separation of concerns.
