@@ -24,7 +24,7 @@ describe('Analytics Class', () => {
         createLogEntry('192.168.0.1', '/home'),
       ];
 
-      logEntries.forEach(entry => analytics.processLogEntry(entry));
+      logEntries.forEach((entry) => analytics.processLogEntry(entry));
 
       expect(analytics.getUniqueIPCount()).toBe(2);
       expect(analytics.ipCounts.get('127.0.0.1')).toBe(2);
@@ -43,7 +43,7 @@ describe('Analytics Class', () => {
         createLogEntry('127.0.0.1', '/home'),
       ];
 
-      logEntries.forEach(entry => analytics.processLogEntry(entry));
+      logEntries.forEach((entry) => analytics.processLogEntry(entry));
 
       expect(analytics.getUniqueIPCount()).toBe(3);
     });
@@ -90,7 +90,7 @@ describe('Analytics Class', () => {
         createLogEntry('192.168.0.2', '/home'),
       ];
 
-      logEntries.forEach(entry => analytics.processLogEntry(entry));
+      logEntries.forEach((entry) => analytics.processLogEntry(entry));
 
       const topIPs = analytics.getTopN(analytics.ipCounts, 2);
       const topUrls = analytics.getTopN(analytics.urlCounts, 2);
@@ -115,7 +115,7 @@ describe('Analytics Class', () => {
         createLogEntry('10.0.0.3', '/about'),
       ];
 
-      logEntries.forEach(entry => analytics.processLogEntry(entry));
+      logEntries.forEach((entry) => analytics.processLogEntry(entry));
 
       const topIPs = analytics.getTopN(analytics.ipCounts, 2);
       const topUrls = analytics.getTopN(analytics.urlCounts, 2);
@@ -148,11 +148,13 @@ describe('Analytics Class', () => {
         createLogEntry('192.168.0.2', '/home'),
       ];
 
-      logEntries.forEach(entry => analytics.processLogEntry(entry));
+      logEntries.forEach((entry) => analytics.processLogEntry(entry));
 
       analytics.printResults();
 
-      expect(console.log).toHaveBeenCalledWith('\nNumber of Unique IP Addresses: 4');
+      expect(console.log).toHaveBeenCalledWith(
+        '\nNumber of Unique IP Addresses: 4'
+      );
 
       expect(console.log).toHaveBeenCalledWith('\nTop 3 Most Visited URLs:');
       expect(console.log).toHaveBeenCalledWith('\n1st - 4 visits:');
@@ -160,7 +162,9 @@ describe('Analytics Class', () => {
       expect(console.log).toHaveBeenCalledWith('\n2nd - 2 visits:');
       expect(console.log).toHaveBeenCalledWith('/about');
 
-      expect(console.log).toHaveBeenCalledWith('\nTop 3 Most Active IP Addresses:');
+      expect(console.log).toHaveBeenCalledWith(
+        '\nTop 3 Most Active IP Addresses:'
+      );
       expect(console.log).toHaveBeenCalledWith('\n1st - 3 requests:');
       expect(console.log).toHaveBeenCalledWith('10.0.0.1');
       expect(console.log).toHaveBeenCalledWith('\n2nd - 2 requests:');
@@ -169,15 +173,15 @@ describe('Analytics Class', () => {
     });
 
     it('should handle cases with fewer than N entries gracefully', () => {
-      const logEntries = [
-        createLogEntry('127.0.0.1', '/home'),
-      ];
+      const logEntries = [createLogEntry('127.0.0.1', '/home')];
 
-      logEntries.forEach(entry => analytics.processLogEntry(entry));
+      logEntries.forEach((entry) => analytics.processLogEntry(entry));
 
       analytics.printResults();
 
-      expect(console.log).toHaveBeenCalledWith('\nNumber of Unique IP Addresses: 1');
+      expect(console.log).toHaveBeenCalledWith(
+        '\nNumber of Unique IP Addresses: 1'
+      );
 
       expect(console.log).toHaveBeenCalledWith('\nTop 3 Most Visited URLs:');
       expect(console.log).toHaveBeenCalledWith('\n1st - 1 visits:');
@@ -187,7 +191,9 @@ describe('Analytics Class', () => {
       expect(console.log).toHaveBeenCalledWith('\n3rd:');
       expect(console.log).toHaveBeenCalledWith('N/A');
 
-      expect(console.log).toHaveBeenCalledWith('\nTop 3 Most Active IP Addresses:');
+      expect(console.log).toHaveBeenCalledWith(
+        '\nTop 3 Most Active IP Addresses:'
+      );
       expect(console.log).toHaveBeenCalledWith('\n1st - 1 requests:');
       expect(console.log).toHaveBeenCalledWith('127.0.0.1');
       expect(console.log).toHaveBeenCalledWith('\n2nd:');

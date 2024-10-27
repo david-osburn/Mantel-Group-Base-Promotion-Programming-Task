@@ -1,18 +1,50 @@
 {
-  "extends": ["airbnb-base", "prettier", "plugin:jest/recommended"],
-  "plugins": ["jest"],
-  "parserOptions": {
-    "ecmaVersion": 2018,
-    "sourceType": "module"
-  },
+  "extends": [
+    "airbnb-base",
+    "plugin:prettier/recommended"
+  ],
   "env": {
-    "es6": true,
+    "browser": true,
     "node": true,
     "jest": true
   },
-  "settings": {
-    "jest": {
-      "version": 29
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module"
+  },
+  "plugins": ["prettier"],
+  "rules": {
+    "prettier/prettier": "error",
+    "import/extensions": [
+      "error",
+      "always",
+      {
+        "js": "always",
+        "jsx": "always",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "import/prefer-default-export": "off",
+    "no-console": "off",
+    "class-methods-use-this": "off",
+    "no-restricted-syntax": [
+      "error",
+      {
+        "selector": "ForInStatement",
+        "message": "for..in loops are not allowed."
+      }
+    ],
+    "no-plusplus": "off",
+    "no-use-before-define": ["error", { "functions": false, "classes": true }],
+    "no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }]
+  },
+  "overrides": [
+    {
+      "files": ["*.test.js", "*.spec.js"],
+      "rules": {
+        "no-console": "off"
+      }
     }
-  }
+  ]
 }

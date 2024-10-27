@@ -1,7 +1,7 @@
-import { processLogFile } from './logProcessor.js';
 import fs from 'fs';
 import readline from 'readline';
 import { Readable } from 'stream';
+import { processLogFile } from './logProcessor.js';
 import { parseLogLine } from './logParser.js';
 import { validateIpAddress, validateUrl } from '../utils/validations.js';
 
@@ -15,8 +15,6 @@ jest.mock('../utils/validations.js', () => ({
 }));
 
 describe('processLogFile', () => {
-  let createReadStreamMock;
-  let createInterfaceMock;
   let mockReadStream;
   let mockReadlineInterface;
   let analyticsMock;
@@ -30,13 +28,15 @@ describe('processLogFile', () => {
     mockReadStream = new Readable({
       read() {},
     });
-    createReadStreamMock = jest.spyOn(fs, 'createReadStream').mockReturnValue(mockReadStream);
+    jest.spyOn(fs, 'createReadStream').mockReturnValue(mockReadStream);
 
     // Mock readline.createInterface to return a mock readline interface
     mockReadlineInterface = {
       on: jest.fn(),
     };
-    createInterfaceMock = jest.spyOn(readline, 'createInterface').mockReturnValue(mockReadlineInterface);
+    jest
+      .spyOn(readline, 'createInterface')
+      .mockReturnValue(mockReadlineInterface);
 
     // Create a mock Analytics instance with a mock processLogEntry method
     analyticsMock = {
@@ -52,7 +52,8 @@ describe('processLogFile', () => {
   });
 
   it('should handle invalid URLs by setting urlPath to "/" and process them if valid', async () => {
-    const logLine = '177.71.128.21 - - [10/Jul/2018:22:21:28 +0200] "GET http:// HTTP/1.1" 200 3574 "-" "-"';
+    const logLine =
+      '177.71.128.21 - - [10/Jul/2018:22:21:28 +0200] "GET http:// HTTP/1.1" 200 3574 "-" "-"';
 
     // Mock parseLogLine to return the parsed log entry with an invalid URL
     parseLogLine.mockReturnValueOnce({

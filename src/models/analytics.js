@@ -23,8 +23,9 @@ export default class Analytics {
   }
 
   getTopN(map, n) {
-    const sortedEntries = Array.from(map.entries())
-      .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+    const sortedEntries = Array.from(map.entries()).sort(
+      (a, b) => b[1] - a[1] || a[0].localeCompare(b[0])
+    );
 
     // Find all entries that tie for the top N counts
     const result = [];
@@ -63,7 +64,7 @@ export default class Analytics {
     for (let i = 1; i <= 3; i++) {
       const ordinal = getOrdinal(i);
       if (groupedResults[i]) {
-        const count = groupedResults[i][0].count;
+        const { count } = groupedResults[i][0];
         console.log(`\n${ordinal} - ${count} ${metric}:`);
         groupedResults[i].forEach(({ key }) => console.log(key));
       } else {

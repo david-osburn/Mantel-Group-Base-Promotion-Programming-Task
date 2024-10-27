@@ -54,7 +54,9 @@ describe('runAnalytics', () => {
     expect(processLogFile).toHaveBeenCalledWith(fileName, analyticsInstance);
     expect(analyticsInstance.hasData).toHaveBeenCalledTimes(1);
     expect(analyticsInstance.printResults).not.toHaveBeenCalled();
-    expect(console.error).toHaveBeenCalledWith('No valid log entries found. Please check the log file.');
+    expect(console.error).toHaveBeenCalledWith(
+      'No valid log entries found. Please check the log file.'
+    );
   });
 
   it('should handle errors thrown by processLogFile', async () => {

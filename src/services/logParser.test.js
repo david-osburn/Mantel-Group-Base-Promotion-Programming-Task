@@ -16,10 +16,10 @@ describe('parseLogLine', () => {
   });
 
   it('should correctly parse a valid log line', () => {
-    const line = '177.71.128.21 - - [10/Jul/2018:22:21:28 +0200] "GET /intranet-analytics/ HTTP/1.1" 200 3574 "-" "-"';
+    const line =
+      '177.71.128.21 - - [10/Jul/2018:22:21:28 +0200] "GET /intranet-analytics/ HTTP/1.1" 200 3574 "-" "-"';
 
     const result = parseLogLine(line);
-
 
     expect(result).toEqual({
       ipAddress: '177.71.128.21',
@@ -36,7 +36,6 @@ describe('parseLogLine', () => {
     const line = 'Invalid log line';
 
     const result = parseLogLine(line);
-
 
     expect(result).toBeNull();
 
@@ -88,7 +87,7 @@ describe('parseLogLine', () => {
       '172.16.0.3 - - [12/Oct/2023:10:10:00 +0000] "DELETE /remove-account HTTP/1.1" -" "-"', // Missing status code
     ];
 
-    incompleteLogLines.forEach(line => {
+    incompleteLogLines.forEach((line) => {
       const result = parseLogLine(line);
       expect(result).toBeNull();
       expect(consoleErrorSpy).toHaveBeenCalledWith(`Invalid log line: ${line}`);
@@ -101,7 +100,7 @@ describe('parseLogLine', () => {
       '10.0.0.2 - - [12/Oct/2023:10:05:00 +0000] "TRACE /trace HTTP/1.1" 200 1024 "-" "-"',
     ];
 
-    unsupportedMethodLines.forEach(line => {
+    unsupportedMethodLines.forEach((line) => {
       const result = parseLogLine(line);
       expect(result).toBeNull();
       expect(consoleErrorSpy).toHaveBeenCalledWith(`Invalid log line: ${line}`);

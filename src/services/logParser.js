@@ -4,7 +4,8 @@
  * @returns {Object|null} - Parsed log entry or null if invalid.
  */
 export function parseLogLine(line) {
-  const logLineRegex = /^(\S+) \S+ \S+ \[(.*?)\] "(GET|POST|PUT|DELETE|HEAD|OPTIONS|PATCH) (.*?) HTTP\/\d\.\d" (\d{3}) \S+.*$/;
+  const logLineRegex =
+    /^(\S+) \S+ \S+ \[(.*?)\] "(GET|POST|PUT|DELETE|HEAD|OPTIONS|PATCH) (.*?) HTTP\/\d\.\d" (\d{3}) \S+.*$/;
   const match = line.match(logLineRegex);
 
   if (!match) {
